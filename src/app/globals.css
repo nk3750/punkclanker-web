@@ -3,25 +3,162 @@
 @tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --background: #0a0a0f;
+  --foreground: #e4e4e7;
+  --cyan: #00fff0;
+  --magenta: #ff00ff;
+  --green: #00ff41;
+  --amber: #ffb700;
 }
 
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0a0a0f;
+}
+::-webkit-scrollbar-thumb {
+  background: #1a1a2e;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #2a2a4e;
+}
+
+/* Selection color */
+::selection {
+  background: rgba(0, 255, 240, 0.3);
+  color: #00fff0;
+}
+
+/* CRT scanline overlay — applied to body::after */
+.crt-overlay::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.04) 2px,
+    rgba(0, 0, 0, 0.04) 4px
+  );
+}
+
+/* Glow effects */
+.glow-cyan {
+  text-shadow: 0 0 10px rgba(0, 255, 240, 0.6), 0 0 30px rgba(0, 255, 240, 0.3), 0 0 60px rgba(0, 255, 240, 0.1);
+}
+
+.glow-magenta {
+  text-shadow: 0 0 10px rgba(255, 0, 255, 0.6), 0 0 30px rgba(255, 0, 255, 0.3), 0 0 60px rgba(255, 0, 255, 0.1);
+}
+
+.glow-green {
+  text-shadow: 0 0 10px rgba(0, 255, 65, 0.5), 0 0 20px rgba(0, 255, 65, 0.2);
+}
+
+.glow-amber {
+  text-shadow: 0 0 10px rgba(255, 183, 0, 0.5), 0 0 20px rgba(255, 183, 0, 0.2);
+}
+
+/* Glitch effect for hero name */
+.glitch {
+  position: relative;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  animation: glitch-clip 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+  color: #00fff0;
+  text-shadow: -2px 0 #ff00ff;
+}
+
+.glitch::after {
+  animation: glitch-clip-2 3s infinite linear alternate-reverse;
+  clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%);
+  color: #ff00ff;
+  text-shadow: 2px 0 #00fff0;
+}
+
+@keyframes glitch-clip {
+  0% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(0); }
+  2% { clip-path: polygon(0 10%, 100% 10%, 100% 50%, 0 50%); transform: translate(-3px, 0); }
+  4% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(0); }
+  6% { clip-path: polygon(0 20%, 100% 20%, 100% 60%, 0 60%); transform: translate(2px, 0); }
+  8% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(0); }
+  100% { clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%); transform: translate(0); }
+}
+
+@keyframes glitch-clip-2 {
+  0% { clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); transform: translate(0); }
+  3% { clip-path: polygon(0 70%, 100% 70%, 100% 100%, 0 100%); transform: translate(3px, 0); }
+  5% { clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); transform: translate(0); }
+  7% { clip-path: polygon(0 55%, 100% 55%, 100% 90%, 0 90%); transform: translate(-2px, 0); }
+  9% { clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); transform: translate(0); }
+  100% { clip-path: polygon(0 60%, 100% 60%, 100% 100%, 0 100%); transform: translate(0); }
+}
+
+/* Terminal hyperlink style */
+.terminal-link {
+  color: #00fff0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(0, 255, 240, 0.4);
+  transition: all 0.2s ease;
+}
+.terminal-link:hover {
+  text-decoration-color: #00fff0;
+  text-shadow: 0 0 8px rgba(0, 255, 240, 0.5), 0 0 16px rgba(0, 255, 240, 0.2);
+}
+
+/* Scanline effect for terminal windows */
+.scanline {
+  position: relative;
+}
+.scanline::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0, 0, 0, 0.03) 2px,
+    rgba(0, 0, 0, 0.03) 4px
+  );
+}
+
+/* ASCII divider */
+.ascii-divider {
+  color: #1a1a2e;
+  letter-spacing: -1px;
+  line-height: 1;
+  user-select: none;
+  overflow: hidden;
 }
