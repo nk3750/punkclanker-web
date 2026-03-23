@@ -116,8 +116,18 @@ export default function Hero() {
           />
         </div>
 
+        {/* Log link */}
+        <div className="mt-12 mb-8">
+          <Link
+            href="/log"
+            className="text-[10px] text-zinc-600 hover:text-accent-cyan transition-colors tracking-widest uppercase"
+          >
+            Log →
+          </Link>
+        </div>
+
         {/* Scroll hint */}
-        <div className="mt-20 text-muted text-xs opacity-30 animate-pulse tracking-widest">
+        <div className="mt-8 text-muted text-xs opacity-30 animate-pulse tracking-widest">
           &#8595; scroll for ops log
         </div>
       </div>

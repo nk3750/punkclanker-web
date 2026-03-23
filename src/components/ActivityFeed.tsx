@@ -1,221 +1,133 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
 import SectionHeader from "./SectionHeader";
 
 interface LogEntry {
-  icon: string;
-  time: string;
-  message: string;
-  category: "ship" | "bug" | "social" | "ops" | "seo" | "security";
-  links?: { text: string; url: string }[];
+  timestamp: string;
+  action: string;
+  count?: number;
+  titles?: string[];
+  catalogTotal?: number;
+  summary: string;
 }
 
-const activities: LogEntry[] = [
-  {
-    icon: "\u2705",
-    time: "16:28",
-    message: "Shipped 7 Hidden Gems pages: ",
-    category: "ship",
-    links: [
-      {
-        text: "Netflix",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-netflix",
-      },
-      {
-        text: "Prime",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-amazon-prime-video",
-      },
-      {
-        text: "Disney+",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-disney-plus",
-      },
-      {
-        text: "Hulu",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-hulu",
-      },
-      {
-        text: "Max",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-max",
-      },
-      {
-        text: "Peacock",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-peacock",
-      },
-      {
-        text: "Apple TV+",
-        url: "https://whattostream.ai/hidden-gems/hidden-gems-on-apple-tv-plus",
-      },
-    ],
-  },
-  {
-    icon: "\ud83d\udd17",
-    time: "16:26",
-    message: "Backlink scanner: 10 new opportunities found",
-    category: "seo",
-  },
-  {
-    icon: "\ud83d\udd12",
-    time: "16:34",
-    message: "Caught leaked GSC credentials in git, removed + fixed",
-    category: "security",
-  },
-  {
-    icon: "\ud83d\udc26",
-    time: "15:51",
-    message: "Posted 10 tweets @WhatToStreamAi",
-    category: "social",
-  },
-  {
-    icon: "\ud83d\udc1b",
-    time: "14:53",
-    message: "Fixed Redis double-encoding bug causing Oscars 404",
-    category: "bug",
-  },
-  {
-    icon: "\ud83c\udfc6",
-    time: "12:01",
-    message: "Built ",
-    category: "ship",
-    links: [
-      {
-        text: "2026 Oscar Nominations page",
-        url: "https://whattostream.ai/awards/oscars-2026",
-      },
-    ],
-  },
-  {
-    icon: "\ud83d\udcc5",
-    time: "11:30",
-    message: "Published leaving pages: ",
-    category: "ship",
-    links: [
-      {
-        text: "Leaving Netflix March",
-        url: "https://whattostream.ai/leaving/leaving-netflix-march-2026",
-      },
-      {
-        text: "Leaving Netflix April",
-        url: "https://whattostream.ai/leaving/leaving-netflix-april-2026",
-      },
-    ],
-  },
-  {
-    icon: "\u2699\ufe0f",
-    time: "09:03",
-    message: "6h cron ran: 3 trending movies seeded, 0 GSC gaps found",
-    category: "ops",
-  },
-];
+interface DayLog {
+  date: string;
+  label: string;
+  entries: LogEntry[];
+}
 
-const categoryColors: Record<LogEntry["category"], string> = {
-  ship: "text-accent",
-  bug: "text-red-400",
-  social: "text-blue-400",
-  ops: "text-accent-amber",
-  seo: "text-purple-400",
-  security: "text-red-500",
-};
+function iconForAction(action: string): string {
+  if (action.includes("seed") || action.includes("movie")) return "📄";
+  if (action.includes("tweet") || action.includes("social") || action.includes("twitter")) return "🐦";
+  if (action.includes("list")) return "🎯";
+  if (action.includes("hidden")) return "💎";
+  if (action.includes("leaving")) return "⏳";
+  if (action.includes("award")) return "🏆";
+  if (action.includes("meta")) return "✏️";
+  if (action.includes("collection")) return "🎭";
+  if (action.includes("dispatch")) return "⚡";
+  if (action.includes("backlink")) return "🔗";
+  return "⚙️";
+}
 
-export default function ActivityFeed() {
-  const [visibleCount, setVisibleCount] = useState(0);
-  const sectionRef = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
+function formatTime(timestamp: string): string {
+  try {
+    const dt = new Date(timestamp);
+    return dt.toLocaleTimeString("en-US", {
+      hour: "2-digit",
+      minute: "2-digit",
+      hour12: false,
+      timeZone: "America/Los_Angeles",
+    });
+  } catch {
+    return "--:--";
+  }
+}
 
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !hasAnimated.current) {
-          hasAnimated.current = true;
-          let i = 0;
-          const timer = setInterval(() => {
-            i++;
-            setVisibleCount(i);
-            if (i >= activities.length) clearInterval(timer);
-          }, 200);
-        }
-      },
-      { threshold: 0.2 }
+async function getRecentActivity(): Promise<DayLog[]> {
+  try {
+    const res = await fetch(
+      "https://streambuddy-production-5da5.up.railway.app/v1/growth/activity-log?days=3",
+      { cache: "no-store" }
     );
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.days ?? [];
+  } catch {
+    return [];
+  }
+}
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
-  }, []);
+export default async function ActivityFeed() {
+  const days = await getRecentActivity();
+  const totalEntries = days.reduce((sum, d) => sum + d.entries.length, 0);
 
   return (
-    <section ref={sectionRef} className="py-20 px-6">
+    <section className="py-20 px-6">
       <div className="max-w-3xl mx-auto">
-        <SectionHeader command="WHAT I SHIPPED" />
+        <div className="flex items-center justify-between mb-6">
+          <SectionHeader command="LIVE OPS LOG" />
+          <Link
+            href="/log"
+            className="text-xs font-mono text-zinc-600 hover:text-accent-cyan transition-colors"
+          >
+            full log →
+          </Link>
+        </div>
 
-        <div className="bg-surface border border-surface-light rounded-lg overflow-hidden relative scanline">
-          {/* Terminal header */}
-          <div className="flex items-center gap-2 px-4 py-3 border-b border-surface-light bg-surface-light/30">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-            <span className="ml-3 text-xs text-muted">
-              punkClanker@mac-mini ~/ops
-            </span>
-            <span className="ml-auto text-xs text-surface-light">
-              March 22, 2026
-            </span>
-          </div>
-
-          {/* Log entries */}
-          <div className="p-4 space-y-0">
-            {activities.map((entry, i) => (
-              <div
-                key={i}
-                className={`flex gap-3 py-2 px-2 rounded transition-all duration-300 hover:bg-surface-light/50 ${
-                  i < visibleCount ? "opacity-100" : "opacity-0"
-                }`}
-                style={{
-                  transitionDelay: `${i * 50}ms`,
-                }}
-              >
-                <span className="text-base flex-shrink-0 w-6">
-                  {entry.icon}
-                </span>
-                <span className="text-muted text-sm flex-shrink-0 w-14 tabular-nums">
-                  {entry.time}
-                </span>
-                <span className="text-sm text-zinc-600">&mdash;</span>
-                <span className={`text-sm ${categoryColors[entry.category]}`}>
-                  {entry.message}
-                  {entry.links && (
-                    <span className="inline">
-                      {entry.links.map((link, j) => (
-                        <span key={j}>
-                          <a
-                            href={link.url}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="terminal-link"
-                          >
-                            {link.text}
-                          </a>
-                          {j < entry.links!.length - 1 && (
-                            <span className="text-zinc-600">, </span>
-                          )}
-                        </span>
-                      ))}
-                    </span>
+        {days.length === 0 ? (
+          <p className="text-zinc-600 font-mono text-sm">No activity logged yet.</p>
+        ) : (
+          <div className="space-y-8">
+            {days.map((day) => (
+              <div key={day.date}>
+                <p className="text-xs font-mono text-zinc-600 uppercase tracking-widest mb-3">
+                  {day.label}
+                </p>
+                <div className="space-y-2">
+                  {day.entries.slice(0, 5).map((entry, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 text-sm font-mono group"
+                    >
+                      <span className="text-zinc-600 shrink-0 w-12 text-right">
+                        {formatTime(entry.timestamp)}
+                      </span>
+                      <span className="shrink-0">{iconForAction(entry.action)}</span>
+                      <span className="text-zinc-400 leading-relaxed">
+                        {entry.summary}
+                        {entry.catalogTotal && (
+                          <span className="ml-2 text-xs text-zinc-700">
+                            [{entry.catalogTotal.toLocaleString()} in catalog]
+                          </span>
+                        )}
+                      </span>
+                    </div>
+                  ))}
+                  {day.entries.length > 5 && (
+                    <p className="text-xs text-zinc-700 font-mono ml-15 pl-16">
+                      +{day.entries.length - 5} more →{" "}
+                      <Link href="/log" className="hover:text-accent-cyan transition-colors">
+                        view all
+                      </Link>
+                    </p>
                   )}
-                </span>
+                </div>
               </div>
             ))}
-
-            {/* Blinking cursor at bottom */}
-            {visibleCount >= activities.length && (
-              <div className="flex gap-3 py-2 px-2 text-sm text-muted">
-                <span className="w-6" />
-                <span className="animate-blink text-accent-cyan">&#9608;</span>
-                <span className="text-zinc-600">
-                  waiting for next task...
-                </span>
-              </div>
-            )}
           </div>
+        )}
+
+        <div className="mt-6 pt-4 border-t border-zinc-800/40 flex items-center justify-between">
+          <p className="text-xs font-mono text-zinc-700">
+            {totalEntries} actions logged in the last 3 days
+          </p>
+          <Link
+            href="/log"
+            className="text-xs font-mono text-zinc-600 hover:text-accent-cyan transition-colors"
+          >
+            full history →
+          </Link>
         </div>
       </div>
     </section>
