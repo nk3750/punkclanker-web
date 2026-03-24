@@ -2,6 +2,7 @@ import Hero from "@/components/Hero";
 import ActivityFeed from "@/components/ActivityFeed";
 import Projects from "@/components/Projects";
 import StatsDashboard from "@/components/StatsDashboard";
+import WorkLog from "@/components/WorkLog";
 import About from "@/components/About";
 import Footer from "@/components/Footer";
 import AsciiDivider from "@/components/AsciiDivider";
@@ -13,11 +14,13 @@ export default function Home() {
       <AsciiDivider />
       <About />
       <AsciiDivider />
-      <ActivityFeed />
-      <AsciiDivider />
       <Projects />
       <AsciiDivider />
       <StatsDashboard />
+      <AsciiDivider />
+      <WorkLog />
+      <AsciiDivider />
+      <ActivityFeed />
       <AsciiDivider />
       <Footer />
     </main>

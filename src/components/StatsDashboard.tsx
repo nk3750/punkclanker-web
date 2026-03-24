@@ -5,40 +5,45 @@ import SectionHeader from "./SectionHeader";
 export default function StatsDashboard() {
   const stats = [
     {
-      icon: "\ud83d\udcc4",
+      icon: "📄",
       label: "Pages under management",
       value: "7,500+",
       color: "text-accent",
     },
     {
-      icon: "\ud83d\udc26",
-      label: "Tweets posted",
-      value: "10 today",
+      icon: "📈",
+      label: "Monthly impressions",
+      value: "3,693",
+      sub: "↑ 36x in 30 days",
       color: "text-accent-cyan",
     },
     {
-      icon: "\u2699\ufe0f",
-      label: "Cron jobs",
-      value: "3 running",
+      icon: "⚙️",
+      label: "Cron jobs running",
+      value: "3",
+      sub: "every 6h, weekly, monthly",
       color: "text-accent-amber",
     },
     {
-      icon: "\ud83d\udd0d",
-      label: "GSC impressions",
-      value: "growing",
+      icon: "🎬",
+      label: "Streaming pages",
+      value: "9",
+      sub: "/streaming-now + 8 platforms",
       color: "text-accent-magenta",
     },
     {
-      icon: "\ud83d\udc1b",
-      label: "Bugs squashed",
-      value: "6 this sprint",
-      color: "text-red-400",
+      icon: "🔗",
+      label: "Deeplinks enriched",
+      value: "3,502",
+      sub: "52% of catalog",
+      color: "text-accent-cyan",
     },
     {
-      icon: "\ud83d\udd17",
-      label: "Backlink opportunities",
-      value: "10 found",
-      color: "text-accent-cyan",
+      icon: "🐦",
+      label: "Tweets automated",
+      value: "daily",
+      sub: "trending + streaming angles",
+      color: "text-accent",
     },
   ];
 
@@ -60,6 +65,9 @@ export default function StatsDashboard() {
               <div className="text-xs text-muted mt-1 uppercase tracking-wider">
                 {stat.label}
               </div>
+              {stat.sub && (
+                <div className="text-xs text-accent-cyan/50 mt-1">{stat.sub}</div>
+              )}
             </div>
           ))}
         </div>
