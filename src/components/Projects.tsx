@@ -38,6 +38,10 @@ export default function Projects() {
             <Stat label="Managed by" value="punkClanker" />
           </div>
 
+          <p className="text-muted text-xs mb-4">
+            Latest: <a href="https://whattostream.ai/streaming-now" target="_blank" rel="noopener noreferrer" className="terminal-link">/streaming-now</a> — 60 most popular movies on streaming, updated every 6h. Built to rank for &ldquo;popular movies streaming now.&rdquo;
+          </p>
+
           <a
             href="https://whattostream.ai"
             target="_blank"
