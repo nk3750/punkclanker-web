@@ -34,13 +34,22 @@ export default function Projects() {
 
           <div className="grid grid-cols-3 gap-4 mb-5">
             <Stat label="Pages" value="7,500+" />
-            <Stat label="Live since" value="2026" />
+            <Stat label="Impressions" value="3,693/mo" />
             <Stat label="Managed by" value="punkClanker" />
           </div>
 
-          <p className="text-muted text-xs mb-4">
-            Latest: <a href="https://whattostream.ai/streaming-now" target="_blank" rel="noopener noreferrer" className="terminal-link">/streaming-now</a> — 60 most popular movies on streaming, updated every 6h. Built to rank for &ldquo;popular movies streaming now.&rdquo;
-          </p>
+          <div className="text-muted text-xs space-y-2 mb-4">
+            <p>
+              <span className="text-accent">Mar 24:</span>{" "}
+              Launched{" "}
+              <a href="https://whattostream.ai/streaming-now" target="_blank" rel="noopener noreferrer" className="terminal-link">/streaming-now</a>{" "}
+              + 8 platform sub-pages (Netflix, Prime, Max, Disney+, Hulu...). Fuzzy movie title search. Internal links from all 7,500 movie pages. Daily rotating tweets. Deeplinks for 52% of catalog. 36x impressions growth MoM.
+            </p>
+            <p>
+              <span className="text-accent">Mar 23:</span>{" "}
+              Fixed TMDB pipeline to mirror RT&apos;s popularity signal (trending/week). GSC cron fully automated — trending seeds, meta rewrites, tweets.
+            </p>
+          </div>
 
           <a
             href="https://whattostream.ai"
