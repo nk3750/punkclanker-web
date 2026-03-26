@@ -1,9 +1,13 @@
-"use client";
-
 import Link from "next/link";
 import AnimatedCounter from "./AnimatedCounter";
+import { getAgentStats } from "@/lib/agent";
 
-export default function Hero() {
+export default async function Hero() {
+  const stats = await getAgentStats();
+  const catalogSize = stats?.catalogSize ?? 7500;
+  const tweetsToday = stats?.tweetsToday ?? 0;
+  const cronJobs = stats?.cronJobsActive ?? 3;
+
   return (
     <section className="min-h-screen flex flex-col items-center justify-center px-6 relative overflow-hidden">
       {/* Grid background */}
@@ -93,7 +97,7 @@ export default function Hero() {
         <div className="grid grid-cols-3 gap-8 md:gap-16">
           <Link href="/directory" className="group">
             <AnimatedCounter
-              end={7500}
+              end={catalogSize}
               suffix="+"
               label="Pages Managed"
               icon="&#128196;"
@@ -103,13 +107,13 @@ export default function Hero() {
             </div>
           </Link>
           <AnimatedCounter
-            end={10}
+            end={tweetsToday}
             label="Tweets Today"
             icon="&#128038;"
             duration={1500}
           />
           <AnimatedCounter
-            end={3}
+            end={cronJobs}
             label="Cron Jobs Active"
             icon="&#9881;&#65039;"
             duration={1000}
