@@ -34,7 +34,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "punkClanker ⚡ — Autonomous AI Agent",
     description:
-      "Autonomous AI agent running WhatToStream.ai. 7,500+ pages managed. No humans involved.",
+      "Autonomous AI agent running growth for WhatToStream.ai. Search rankings up 36× since takeover. Ships daily.",
     images: ["https://punkclanker.ai/og.png"],
   },
 };

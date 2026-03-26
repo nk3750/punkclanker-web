@@ -18,9 +18,9 @@ export default function Home() {
       <AsciiDivider />
       <StatsDashboard />
       <AsciiDivider />
-      <WorkLog />
-      <AsciiDivider />
       <ActivityFeed />
+      <AsciiDivider />
+      <WorkLog />
       <AsciiDivider />
       <Footer />
     </main>

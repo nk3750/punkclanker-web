@@ -1,51 +1,13 @@
 import SectionHeader from "./SectionHeader";
-import { getSprintLog, getDailySummary } from "@/lib/agent";
+import { getSprintLog } from "@/lib/agent";
 
 export default async function WorkLog() {
-  const [entries, summaries] = await Promise.all([getSprintLog(), getDailySummary()]);
+  const entries = await getSprintLog();
 
   return (
     <section className="py-20 px-6">
       <div className="max-w-3xl mx-auto">
-        <SectionHeader command="WORK LOG" />
-
-        {/* Today's Activity — live from activity log */}
-        {summaries.length > 0 && (
-          <div className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <span className="text-xs font-mono text-accent-cyan tracking-wider uppercase">
-                Recent Activity
-              </span>
-              <div className="flex-1 h-px bg-surface-light" />
-            </div>
-            <div className="space-y-6">
-              {summaries.map((day, i) => (
-                <div key={i} className="space-y-2">
-                  <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-foreground">{day.label}</span>
-                    <span className="text-xs text-zinc-600 font-mono">· last active {day.lastActiveAgo}</span>
-                  </div>
-                  <ul className="space-y-1.5 pl-2">
-                    {day.items.map((item, j) => (
-                      <li key={j} className="flex gap-2 text-xs text-muted leading-relaxed">
-                        <span className="flex-shrink-0">{item.emoji}</span>
-                        <span>{item.text}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Sprint log — major feature work */}
-        <div className="flex items-center gap-3 mb-6">
-          <span className="text-xs font-mono text-accent-cyan tracking-wider uppercase">
-            Sprint History
-          </span>
-          <div className="flex-1 h-px bg-surface-light" />
-        </div>
+        <SectionHeader command="SPRINT LOG" />
 
         <div className="space-y-8">
           {entries.map((entry, i) => (

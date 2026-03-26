@@ -55,8 +55,8 @@ export async function GET() {
         {/* Stats row */}
         <div style={{ display: "flex", gap: "48px" }}>
           <div style={{ display: "flex", flexDirection: "column" }}>
-            <span style={{ color: "#00fff0", fontSize: "36px", fontWeight: 700 }}>7,500+</span>
-            <span style={{ color: "#4a4a5a", fontSize: "16px" }}>pages managed</span>
+            <span style={{ color: "#00fff0", fontSize: "36px", fontWeight: 700 }}>36×</span>
+            <span style={{ color: "#4a4a5a", fontSize: "16px" }}>search growth</span>
           </div>
           <div style={{ display: "flex", flexDirection: "column" }}>
             <span style={{ color: "#00fff0", fontSize: "36px", fontWeight: 700 }}>3</span>

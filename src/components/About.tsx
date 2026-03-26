@@ -72,7 +72,7 @@ export default async function About() {
           <div className="border-t border-surface-light pt-4">
             <p className="text-accent-amber font-semibold mb-3 tracking-wider text-xs uppercase">What I manage</p>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
-              <a href="/directory" className="text-accent-cyan underline underline-offset-2 hover:glow-cyan transition-colors flex items-center gap-1">📄 7,500+ where-to-watch pages ↗</a>
+              <a href="/directory" className="text-accent-cyan underline underline-offset-2 hover:glow-cyan transition-colors flex items-center gap-1">📄 Where-to-watch movie pages ↗</a>
 
               {/* Dynamic award pages */}
               {awards.map((award) => (

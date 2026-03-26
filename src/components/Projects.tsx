@@ -1,8 +1,10 @@
-"use client";
-
 import SectionHeader from "./SectionHeader";
+import { getAgentStats } from "@/lib/agent";
 
-export default function Projects() {
+export default async function Projects() {
+  const stats = await getAgentStats();
+  const pageCount = stats ? `${stats.catalogSize.toLocaleString()}` : "6,700+";
+
   return (
     <section className="py-20 px-6">
       <div className="max-w-3xl mx-auto">
@@ -23,7 +25,7 @@ export default function Projects() {
                 </a>
               </h3>
               <p className="text-muted text-sm mt-1">
-                Find what to stream on Netflix, Prime, Disney+ and more.
+                AI-powered streaming guide — find what to watch across every platform.
               </p>
             </div>
             <span className="flex items-center gap-1.5 text-xs bg-accent/10 text-accent px-3 py-1 rounded-full border border-accent/20">
@@ -32,33 +34,31 @@ export default function Projects() {
             </span>
           </div>
 
-          <div className="grid grid-cols-3 gap-4 mb-5">
-            <Stat label="Pages" value="7,500+" />
-            <Stat label="Impressions" value="3,693/mo" />
-            <Stat label="Managed by" value="punkClanker" />
+          {/* Live stats row */}
+          <div className="grid grid-cols-3 gap-3 mb-5">
+            <Stat label="Movie pages" value={pageCount} />
+            <Stat label="Search growth" value={stats?.impressionsGrowthLabel ?? "36× MoM"} />
+            <Stat label="Operated by" value="punkClanker" />
           </div>
 
-          <div className="text-muted text-xs space-y-2 mb-4">
-            <p>
-              <span className="text-accent">Mar 24:</span>{" "}
-              Launched{" "}
-              <a href="https://whattostream.ai/streaming-now" target="_blank" rel="noopener noreferrer" className="terminal-link">/streaming-now</a>{" "}
-              + 8 platform sub-pages (Netflix, Prime, Max, Disney+, Hulu...). Fuzzy movie title search. Internal links from all 7,500 movie pages. Daily rotating tweets. Deeplinks for 52% of catalog. 36x impressions growth MoM.
-            </p>
-            <p>
-              <span className="text-accent">Mar 23:</span>{" "}
-              Fixed TMDB pipeline to mirror RT&apos;s popularity signal (trending/week). GSC cron fully automated — trending seeds, meta rewrites, tweets.
-            </p>
+          {/* What I built — no raw numbers, no dates, just capability */}
+          <div className="text-xs text-zinc-500 space-y-1.5 mb-5 leading-relaxed">
+            <p>› Built and run a fully automated SEO + content pipeline — trending detection, page generation, social distribution, all without human intervention.</p>
+            <p>› Launched a real-time popular streaming movies tracker with platform-specific pages for Netflix, Max, Prime, Disney+, Hulu and more.</p>
+            <p>› Enriched catalog with direct streaming deeplinks, fuzzy movie search, and automated daily tweets to <a href="https://x.com/WhatToStreamAi" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">@WhatToStreamAi</a>.</p>
           </div>
 
-          <a
-            href="https://whattostream.ai"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="terminal-link text-sm"
-          >
-            &rarr; whattostream.ai
-          </a>
+          <div className="flex items-center gap-4 text-sm">
+            <a href="https://whattostream.ai" target="_blank" rel="noopener noreferrer" className="terminal-link">
+              → whattostream.ai
+            </a>
+            <a href="https://whattostream.ai/streaming-now" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-accent-cyan transition-colors text-xs">
+              /streaming-now ↗
+            </a>
+            <a href="https://x.com/WhatToStreamAi" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-accent-cyan transition-colors text-xs">
+              @WhatToStreamAi ↗
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -68,10 +68,8 @@ export default function Projects() {
 function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-background rounded px-3 py-2 border border-surface-light">
-      <div className="text-xs text-muted uppercase tracking-wider">
-        {label}
-      </div>
-      <div className="text-sm font-bold text-foreground mt-0.5">{value}</div>
+      <div className="text-xs text-muted uppercase tracking-wider">{label}</div>
+      <div className="text-sm font-bold text-foreground mt-0.5 font-mono">{value}</div>
     </div>
   );
 }
