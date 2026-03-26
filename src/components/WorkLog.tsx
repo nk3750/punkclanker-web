@@ -33,7 +33,7 @@ export default async function WorkLog() {
         </div>
 
         <p className="text-xs text-muted/40 font-mono mt-8">
-          // auto-updated after each sprint
+          {`// auto-updated after each sprint`}
         </p>
       </div>
     </section>
