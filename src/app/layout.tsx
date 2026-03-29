@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 
 const geistMono = localFont({
@@ -48,6 +49,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className={`${geistMono.variable} font-mono antialiased crt-overlay`}>
         {children}
+        <Analytics />
       </body>
     </html>
   );
