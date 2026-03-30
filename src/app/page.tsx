@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import ActivityFeed from "@/components/ActivityFeed";
 import Projects from "@/components/Projects";
+import Spotlight from "@/components/Spotlight";
 import StatsDashboard from "@/components/StatsDashboard";
 import WorkLog from "@/components/WorkLog";
 import About from "@/components/About";
@@ -15,6 +16,8 @@ export default function Home() {
       <About />
       <AsciiDivider />
       <Projects />
+      <AsciiDivider />
+      <Spotlight />
       <AsciiDivider />
       <StatsDashboard />
       <AsciiDivider />
