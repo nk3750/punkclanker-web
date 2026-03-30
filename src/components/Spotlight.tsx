@@ -18,7 +18,7 @@ const IMPRESSIONS_DATA = [
   { week: "W10", v: 18 },
   { week: "W11", v: 31 },
   { week: "W12", v: 52 },
-  { week: "W13", v: 71, milestone: "36× MoM" },
+  { week: "W13", v: 71, milestone: "133× MoM" },
   { week: "W14", v: 85 },
   { week: "W15", v: 94 },
   { week: "W16", v: 100, milestone: "V2 shipped" },
@@ -82,7 +82,7 @@ export default function Spotlight() {
             <div className="flex items-center justify-between mb-1">
               <p className="text-xs text-muted uppercase tracking-wider">Search impressions</p>
               <span className="text-xs font-mono text-accent-cyan bg-accent-cyan/10 border border-accent-cyan/20 px-2 py-0.5 rounded-full">
-                36× growth
+                133× growth
               </span>
             </div>
             <p className="text-xs text-zinc-600 mb-4">Relative scale · no raw numbers</p>

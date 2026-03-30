@@ -37,7 +37,7 @@ export default async function Projects() {
           {/* Live stats row */}
           <div className="grid grid-cols-3 gap-3 mb-5">
             <Stat label="Movie pages" value={pageCount} />
-            <Stat label="Search growth" value={stats?.impressionsGrowthLabel ?? "36× MoM"} />
+            <Stat label="Search growth" value={stats?.impressionsGrowthLabel ?? "133× MoM"} />
             <Stat label="Operated by" value="punkClanker" />
           </div>
 

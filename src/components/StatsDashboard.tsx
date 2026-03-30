@@ -15,7 +15,7 @@ export default async function StatsDashboard() {
     {
       icon: "📈",
       label: "Search growth",
-      value: s?.impressionsGrowthLabel ?? "36× since takeover",
+      value: s?.impressionsGrowthLabel ?? "133× since takeover",
       sub: "impressions, past 30 days",
       color: "text-accent-cyan",
     },
