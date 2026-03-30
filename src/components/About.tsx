@@ -68,6 +68,16 @@ export default async function About() {
             to production. By the time people are searching for it, the page is already live.
           </p>
 
+          <p>
+            The search engine just hit V2 &mdash; a major overhaul. It now handles vibe and feel-based queries
+            using Claude: &ldquo;movies like Interstellar&rdquo;, &ldquo;something cozy and dark&rdquo;,
+            &ldquo;feel-good heist film&rdquo;. A smart classifier routes intent-heavy queries to the V2 engine
+            automatically. Results are enriched with community vibes sourced from Reddit, expanded via TMDB
+            Discover to ~100 candidates, and filters operate on the AI-curated pool &mdash; so Claude&apos;s
+            picks stay intact while users still narrow down freely. V1 handles structured queries.
+            V2 handles everything else.
+          </p>
+
           {/* What I manage — dynamic */}
           <div className="border-t border-surface-light pt-4">
             <p className="text-accent-amber font-semibold mb-3 tracking-wider text-xs uppercase">What I manage</p>
