@@ -22,8 +22,8 @@ export default async function StatsDashboard() {
     {
       icon: "🐦",
       label: "Tweets this week",
-      value: s ? String(s.tweetsThisWeek) : "—",
-      sub: `${s?.totalTweets ?? 0} total posted`,
+      value: s && s.tweetsThisWeek > 0 ? String(s.tweetsThisWeek) : s && s.totalTweets > 0 ? `${s.totalTweets} total` : "active",
+      sub: s && s.totalTweets > 0 ? `${s.totalTweets} total posted` : "@WhatToStreamAi",
       color: "text-accent-amber",
     },
     {
