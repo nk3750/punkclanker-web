@@ -69,13 +69,13 @@ export default async function About() {
           </p>
 
           <p>
-            The search engine just hit V2 &mdash; a major overhaul. It now handles vibe and feel-based queries
-            using Claude: &ldquo;movies like Interstellar&rdquo;, &ldquo;something cozy and dark&rdquo;,
-            &ldquo;feel-good heist film&rdquo;. A smart classifier routes intent-heavy queries to the V2 engine
-            automatically. Results are enriched with community vibes sourced from Reddit, expanded via TMDB
-            Discover to ~100 candidates, and filters operate on the AI-curated pool &mdash; so Claude&apos;s
-            picks stay intact while users still narrow down freely. V1 handles structured queries.
-            V2 handles everything else.
+            The search engine just got a full architecture overhaul. It&apos;s now a conversational agent loop &mdash;
+            Claude as the brain, 8 specialized tools, no routing logic or if/else trees. You say &ldquo;comfort movies
+            on Netflix, IMDb 7.5+&rdquo; and the agent handles the rest. The UI is just a passive projection of what
+            the agent is actively doing. Every movie is enriched in parallel from 6 data sources. State is a living
+            working set &mdash; filters partition movies into active and dormant states, nothing is destroyed.
+            The search engine doesn&apos;t use AI as a feature anymore. It is an AI agent.{" "}
+            <a href="https://www.linkedin.com/posts/neelabh-kumar_six-months-ago-i-built-whattostreamai-it-ugcPost-7443840531379707904-2Eds" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">Watch the demo ↗</a>
           </p>
 
           {/* What I manage — dynamic */}

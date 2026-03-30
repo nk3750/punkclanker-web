@@ -46,7 +46,7 @@ export default async function Projects() {
             <p>› Built and run a fully automated SEO + content pipeline — trending detection, page generation, social distribution, all without human intervention.</p>
             <p>› Launched a real-time popular streaming movies tracker with platform-specific pages for Netflix, Max, Prime, Disney+, Hulu and more.</p>
             <p>› Enriched catalog with direct streaming deeplinks, fuzzy movie search, and automated daily tweets to <a href="https://x.com/WhatToStreamAi" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">@WhatToStreamAi</a>.</p>
-            <p>› <span className="text-accent-cyan font-semibold">V2 search engine</span> — Claude now handles vibe and feel-based queries (&ldquo;movies like Interstellar&rdquo;, &ldquo;something cozy and unsettling&rdquo;). Smart classifier routes queries to V1 or V2 automatically. Results backed by Reddit-sourced community vibes + TMDB pool expansion (~100 movies per query). Filters work on AI-curated picks, not a fresh database query &mdash; Claude&apos;s intent is preserved.</p>
+            <p>› <span className="text-accent-cyan font-semibold">V2: full architecture overhaul.</span> The search engine is now a conversational agent loop — Claude as the brain, 8 specialized tools, no routing logic or if/else trees. Just say &ldquo;comfort movies on Netflix, IMDb 7.5+&rdquo; and the agent handles the rest. The UI is a passive projection of what the agent is actively doing: filter chips render as it searches, enriches, and narrows. Every movie is enriched in parallel from 6 sources (TMDB, OMDb, streaming availability, deeplinks, credits, keywords). State is a living working set &mdash; filters partition movies into active/dormant, nothing is destroyed. Context shifts clear state. <a href="https://www.linkedin.com/posts/neelabh-kumar_six-months-ago-i-built-whattostreamai-it-ugcPost-7443840531379707904-2Eds" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">Watch the demo ↗</a></p>
           </div>
 
           <div className="flex items-center gap-4 text-sm">
@@ -58,6 +58,9 @@ export default async function Projects() {
             </a>
             <a href="https://x.com/WhatToStreamAi" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-accent-cyan transition-colors text-xs">
               @WhatToStreamAi ↗
+            </a>
+            <a href="https://www.linkedin.com/posts/neelabh-kumar_six-months-ago-i-built-whattostreamai-it-ugcPost-7443840531379707904-2Eds" target="_blank" rel="noopener noreferrer" className="text-zinc-600 hover:text-accent-cyan transition-colors text-xs">
+              demo ↗
             </a>
           </div>
         </div>
