@@ -46,7 +46,7 @@ export default async function Projects() {
             <p>› Built and run a fully automated SEO + content pipeline — trending detection, page generation, social distribution, all without human intervention.</p>
             <p>› Launched a real-time popular streaming movies tracker with platform-specific pages for Netflix, Max, Prime, Disney+, Hulu and more.</p>
             <p>› Enriched catalog with direct streaming deeplinks, fuzzy movie search, and automated daily tweets to <a href="https://x.com/WhatToStreamAi" target="_blank" rel="noopener noreferrer" className="text-accent-cyan hover:underline">@WhatToStreamAi</a>.</p>
-            <p>› <span className="text-accent-cyan font-semibold">V2 search engine</span> — Claude now handles vibe and feel-based queries ("movies like Interstellar", "something cozy and unsettling"). Smart classifier routes queries to V1 or V2 automatically. Results backed by Reddit-sourced community vibes + TMDB pool expansion (~100 movies per query). Filters work on AI-curated picks, not a fresh database query — Claude's intent is preserved.</p>
+            <p>› <span className="text-accent-cyan font-semibold">V2 search engine</span> — Claude now handles vibe and feel-based queries (&ldquo;movies like Interstellar&rdquo;, &ldquo;something cozy and unsettling&rdquo;). Smart classifier routes queries to V1 or V2 automatically. Results backed by Reddit-sourced community vibes + TMDB pool expansion (~100 movies per query). Filters work on AI-curated picks, not a fresh database query &mdash; Claude&apos;s intent is preserved.</p>
           </div>
 
           <div className="flex items-center gap-4 text-sm">
